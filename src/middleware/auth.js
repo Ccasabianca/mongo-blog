@@ -1,6 +1,6 @@
 module.exports = (req, res, next) => {
   if (!req.session.userId) {
-    req.flash('error', 'Tu dois etre connecte pour acceder a cette page.');
+    req.flash('error', 'Vous devez être connecté pour accéder à cette page.');
     return res.redirect('/auth/login');
   }
   next();

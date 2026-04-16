@@ -8,7 +8,7 @@ module.exports = async (req, res, next) => {
     if (!post) return next();
 
     if (!post.userId || post.userId.toString() !== req.session.userId) {
-      req.flash('error', 'Tu ne peux modifier que tes propres posts.');
+      req.flash('error', 'Vous ne pouvez modifier que vos propres posts.');
       return res.redirect('/post/' + post._id);
     }
 
@@ -28,10 +28,10 @@ module.exports = async (req, res, next) => {
     }
 
     await post.save();
-    req.flash('success', 'Post mis a jour.');
+    req.flash('success', 'Post mis à jour.');
     res.redirect('/post/' + post._id);
   } catch (err) {
-    console.error('Erreur mise a jour post :', err.message);
+    console.error('Erreur mise à jour post :', err.message);
     const errors = err.errors
       ? Object.values(err.errors).map(e => e.message)
       : [err.message];

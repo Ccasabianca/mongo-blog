@@ -22,7 +22,7 @@ module.exports = async (req, res) => {
     req.flash('success', 'Post publié avec succès.');
     res.redirect('/');
   } catch (err) {
-    console.error('Erreur creation post :', err.message);
+    console.error('Erreur création post :', err.message);
     const errors = err.errors
       ? Object.values(err.errors).map(e => e.message)
       : [err.message];

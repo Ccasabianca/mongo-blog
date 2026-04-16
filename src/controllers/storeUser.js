@@ -2,13 +2,14 @@ const User = require('../models/user');
 
 module.exports = async (req, res) => {
   try {
+    console.log('Données reçues :', req.body);
     const user = await User.create({
       username: req.body.username,
       email: req.body.email,
       password: req.body.password,
     });
     req.session.userId = user._id.toString();
-    req.flash('success', 'Bienvenue ' + user.username + ' !');
+    req.flash('success', 'Bienvenue, ' + user.username + ' !');
     res.redirect('/');
   } catch (err) {
     console.error('Erreur inscription :', err.message);
@@ -22,8 +23,8 @@ module.exports = async (req, res) => {
       const field = Object.keys(err.keyPattern)[0];
       errors.push(
         field === 'email'
-          ? 'Cet email est deja utilise.'
-          : 'Ce nom d utilisateur est deja pris.'
+          ? 'Cet email est déjà utilisé.'
+          : 'Ce nom d\'utilisateur est déjà pris.'
       );
     }
     else {

@@ -23,7 +23,7 @@ module.exports = async (req, res) => {
     res.redirect('/');
   } catch (err) {
     console.error('Erreur connexion :', err.message);
-    req.flash('error', 'Erreur serveur, reessaie.');
+    req.flash('error', 'Erreur serveur, veuillez réessayer.');
     res.redirect('/auth/login');
   }
 };

@@ -8,7 +8,7 @@ module.exports = async (req, res, next) => {
     if (!post) return next();
 
     if (!post.userId || post.userId.toString() !== req.session.userId) {
-      req.flash('error', 'Tu ne peux supprimer que tes propres posts.');
+      req.flash('error', 'Vous ne pouvez supprimer que vos propres posts.');
       return res.redirect('/post/' + post._id);
     }
 
