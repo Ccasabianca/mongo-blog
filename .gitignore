@@ -1,0 +1,3 @@
+node_modules/
+public/img/uploads/*
+!public/img/uploads/.gitkeep

@@ -1,0 +1,43 @@
+<%- include('layouts/header') %>
+<%- include('layouts/navbar') %>
+        <header class="masthead" style="background-image: url('/assets/img/post-bg.jpg')">
+            <div class="container position-relative px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <div class="post-heading">
+                            <h1><%= post.title %></h1>
+                            <div class="meta">
+                                Publié par
+                                <a href="#!"><%= post.userId ? post.userId.username : 'Anonyme' %></a>
+                                le <%= (post.datePosted || post._id.getTimestamp()).toLocaleDateString('fr-FR') %>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <%- include('layouts/flash') %>
+        <article class="mb-4">
+            <div class="container px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <% if (post.image) { %>
+                            <img class="img-fluid rounded mb-4" src="/img/uploads/<%= post.image %>" alt="<%= post.title %>" />
+                        <% } %>
+                        <p><%= post.body %></p>
+
+                        <% if (loggedIn && post.userId && currentUser && post.userId._id.toString() === currentUser._id.toString()) { %>
+                            <hr class="my-4" />
+                            <div class="d-flex gap-2">
+                                <a class="btn btn-outline-primary text-uppercase" href="/post/<%= post._id %>/edit">Modifier</a>
+                                <form action="/post/<%= post._id %>/delete" method="POST" onsubmit="return confirm('Supprimer ce post definitivement ?');">
+                                    <button type="submit" class="btn btn-outline-danger text-uppercase">Supprimer</button>
+                                </form>
+                            </div>
+                        <% } %>
+                    </div>
+                </div>
+            </div>
+        </article>
+<%- include('layouts/footer') %>
+<%- include('layouts/script') %>

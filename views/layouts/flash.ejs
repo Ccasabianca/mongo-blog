@@ -1,0 +1,37 @@
+<% if (flashSuccess && flashSuccess.length > 0) { %>
+    <div class="container px-4 px-lg-5 mt-4">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <% flashSuccess.forEach(function(msg) { %>
+                    <div class="alert alert-success"><%= msg %></div>
+                <% }) %>
+            </div>
+        </div>
+    </div>
+<% } %>
+<% if (flashError && flashError.length > 0) { %>
+    <div class="container px-4 px-lg-5 mt-4">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <% flashError.forEach(function(msg) { %>
+                    <div class="alert alert-danger"><%= msg %></div>
+                <% }) %>
+            </div>
+        </div>
+    </div>
+<% } %>
+<% if (validationErrors && validationErrors.length > 0) { %>
+    <div class="container px-4 px-lg-5 mt-4">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="alert alert-danger">
+                    <ul class="mb-0">
+                        <% validationErrors.forEach(function(err) { %>
+                            <li><%= err %></li>
+                        <% }) %>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+<% } %>

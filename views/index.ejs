@@ -1,0 +1,52 @@
+<%- include('layouts/header') %>
+<%- include('layouts/navbar') %>
+        <header class="masthead" style="background-image: url('/assets/img/home-bg.jpg')">
+            <div class="container position-relative px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <div class="site-heading">
+                            <h1>Mon Blog</h1>
+                            <span class="subheading">Blog MongoDB et NodeJS</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <%- include('layouts/flash') %>
+        <div class="container px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-md-10 col-lg-8 col-xl-7">
+                    <% if (posts && posts.length > 0) { %>
+                        <% posts.forEach(function(post) { %>
+                            <div class="post-preview">
+                                <a href="/post/<%= post._id %>">
+                                    <h2 class="post-title"><%= post.title %></h2>
+                                </a>
+                                <% if (post.image) { %>
+                                    <a href="/post/<%= post._id %>">
+                                        <img class="img-fluid rounded mb-3" src="/img/uploads/<%= post.image %>" alt="<%= post.title %>" />
+                                    </a>
+                                <% } %>
+                                <p class="post-meta">
+                                    Publié par
+                                    <a href="#!"><%= post.userId ? post.userId.username : 'Anonyme' %></a>
+                                    le <%= (post.datePosted || post._id.getTimestamp()).toLocaleDateString('fr-FR') %>
+                                </p>
+                            </div>
+                            <hr class="my-4" />
+                        <% }) %>
+                    <% } else { %>
+                        <p class="text-center text-muted my-5">
+                            Aucun post pour le moment.
+                            <% if (loggedIn) { %>
+                                <a href="/post/new">Créez le premier post</a>
+                            <% } else { %>
+                                <a href="/auth/login">Connectez-vous</a> pour en créer un
+                            <% } %>
+                        </p>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+<%- include('layouts/footer') %>
+<%- include('layouts/script') %>
